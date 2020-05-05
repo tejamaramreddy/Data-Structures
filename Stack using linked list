@@ -1,0 +1,101 @@
+package code;
+
+import java.util.Scanner;
+
+public class Stack {
+	public Node head = null;
+	public int count = 0;
+	public void push(int data) {
+		Node new_node = new Node(data);
+		Node current = head;
+		if(head == null) {
+			head = new_node;
+			count++;
+		}
+		else {
+			new_node.next = current;
+			head = new_node;
+			count++;
+		}
+		System.out.println(new_node.data+" is pushed to stack");
+	}
+	public void pop() {
+		Node current = head;
+		if(head == null) {
+			System.out.print("Stack is empty");
+		}
+		else {
+			System.out.print(current.data+" is poped!!");
+			head = current.next;
+			current.next = null;
+			count--;
+		}
+	}
+	public void display() {
+		Node current = head;
+		if(head == null) {
+			System.out.print("Stack is empty ");
+			System.out.print("\n");
+		}
+		else {
+			System.out.print("\n");
+			while(current != null) {
+				System.out.print(current.data+" ");
+				current = current.next;
+			}
+			System.out.print("\n");
+		}
+	}
+	public void peek() {
+		Node current = head;
+		if(head == null) {
+			System.out.println("No peek element\n");
+		}
+		else {
+			System.out.println(current.data +" is peek element");
+		}
+	}
+	public void count() {
+		System.out.println(count+" elements in stack");
+	}
+	public static void main(String[] args) {
+		Stack stack = new Stack();
+		/*
+		 * stack.display(); stack.push(1); stack.push(2); stack.push(3); stack.push(4);
+		 * stack.push(5); stack.pop(); stack.display(); stack.peek(); stack.count();
+		 */
+		while(true) {
+			Scanner sc = new Scanner(System.in);
+			System.out.println(" 1. Push \n 2. Pop \n 3. Display \n 4. Peek \n 5. Count \n 6. Exit \n Enter your choice : ");
+			int x = sc.nextInt();
+			switch(x) {
+			case 1:{
+				System.out.print("Enter element to push: ");
+				int data = sc.nextInt();
+				stack.push(data);
+				break;
+			}
+			case 2:{
+				stack.pop();
+				break;
+			}
+			case 3:{
+				stack.display();
+				break;
+			}
+			case 4:{
+				stack.peek();
+				break;
+			}
+			case 5:{
+				stack.count();
+				break;
+			}
+			}
+			if(x == 6) {
+				break;
+			}
+		}
+	}
+
+}
