@@ -1,0 +1,47 @@
+package Recursion.Assignments;
+
+import java.util.ArrayList;
+
+public class PerfectSquares {
+    public static void main(String[] args) {
+        ArrayList<ArrayList<Integer>> allCombinations = new ArrayList<>();
+        ArrayList<Integer> list = perfectNumbers(13);
+        ArrayList<Integer> result = new ArrayList<>();
+        combinations(new ArrayList<>(), 13,list, allCombinations);
+        int len = allCombinations.get(0).size();
+        for (ArrayList<Integer> sublist: allCombinations) {
+            if(sublist.size() < len){
+                len = sublist.size();
+                result = sublist;
+            }
+        }
+        System.out.println(result);
+
+    }
+    static ArrayList<Integer> perfectNumbers( int n){
+        ArrayList<Integer> listOfPerfectNum = new ArrayList<>();
+        for (int i = 1; i <= n; i++) {
+            if( i * i > n){
+                break;
+            }
+            listOfPerfectNum.add( i * i);
+        }
+        return listOfPerfectNum;
+    }
+
+    static void combinations(ArrayList<Integer> processed, int target, ArrayList<Integer> itemsList, ArrayList<ArrayList<Integer>> allCombinations){
+        if(target == 0){
+           // System.out.println(processed);
+            allCombinations.add(new ArrayList<>(processed));
+            return;
+        }
+
+        for (int i = 0; i < itemsList.size() && i <= target; i++) {
+            processed.add(itemsList.get(i));
+            combinations(processed, target - itemsList.get(i), itemsList,  allCombinations);
+            processed.remove(processed.size() - 1);
+        }
+
+    }
+
+}
